@@ -14,8 +14,8 @@ def withdraw_money(balance, withdraw):
         return balance
     else:
         return "Insufficient funds"
-    
-    
+
+
 print(withdraw_money(balance, withdraw))  # 300
 print(withdraw_money(balance, withdraw2))  # 1100
 print(withdraw_money(balance, 2000.50))  # Insufficient funds
@@ -43,8 +43,6 @@ print(withdraw_money_with_limit(1500, 1600))  # (1500, 100, 'Withdrawal successf
 print(withdraw_money_with_limit(1500, 1800, 350))  # (1500, 100, 'Withdrawal successful, but you are using your limit')
 print(withdraw_money_with_limit(1500, 2000, 350))  # (1500, 350, 'Insufficient funds')
 
-# (1500, 100, 'Withdrawal successful, but you are using your limit')
-            
 print("\n==== Elif ====")
 
 age = 18
@@ -56,3 +54,8 @@ elif age == 18:
 else:
     print("You are an adult")
 
+print("\n==== Ternary operator ====")
+
+age = 18
+message = "You are an adult" if age >= 18 else "You are a minor"
+print(message)
