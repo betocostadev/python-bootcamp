@@ -23,9 +23,6 @@ Press a number to select an option
     4 - Exit
 """
 
-invalid_amount_message = """
-=== Invalid amount ===
-"""
 
 withdrawal_daily_limit_exceeded_message = "You have reached the withdrawal limit for today. Try again tomorrow."
 withdrawal_limit_exceeded_message = f"You have reached the withdrawal limit: {limit}"
@@ -34,9 +31,9 @@ insuficient_funds_message = f"""
 === Insufficient balance ===
 Your balance is: R${balance}
 """
-statements_message = """
-======= Statements =========
-"""
+
+invalid_amount_message = "======= Invalid amount ======="
+statements_message = "======= Statements ========="
 
 
 while True:
@@ -44,9 +41,13 @@ while True:
 
     if (option == "1"):
         deposit = float(input("Enter the amount to deposit: "))
-        balance += deposit
-        statements += f"Deposited: R${deposit}, Balance: R${balance}\n"
-        print(f"\nDeposited: R$ {deposit}, Balance: R${balance}")
+        if (deposit <= 0):
+            print(invalid_amount_message)
+            continue
+        else:
+            balance += deposit
+            statements += f"Deposited: R${deposit}, Balance: R${balance}\n"
+            print(f"\nDeposited: R$ {deposit}, Balance: R${balance}")
 
     elif (option == "2"):
         if (withdrawal_count >= WITHDRAWAL_LIMIT):
