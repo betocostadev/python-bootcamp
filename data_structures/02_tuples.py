@@ -37,3 +37,6 @@ matrix = (
 )
 print(matrix)
 print("1 + 1 is equal to the matrix element [0][1]", matrix[0][1])
+
+carros = ("gol")
+print(isinstance(carros, tuple))
