@@ -48,5 +48,5 @@ print("\nCars list length is", len(cars3))
 sorted_cars = sorted(cars3, key=lambda x: len(x))
 print(sorted_cars)
 
-test = [n**2 if n > 6 else n for n in range(10) if n % 2 == 0] 
+test = [n**2 if n > 6 else n for n in range(10) if n % 2 == 0]
 print(test)
