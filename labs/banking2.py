@@ -84,7 +84,6 @@ def create_user():
     print(create_user_message)
     document = input("Enter your document number: ")
 
-    # Check if the user already exists in the users list
     for user in users:
         if user["document"] == document:
             print("\nUser already exists")
@@ -137,23 +136,52 @@ def create_account(document):
         "account_number": account_number,
         "user": document,
         "balance": 0,
+        "statements": [],
+        "withdrawal_count_today": 0,
+        "WITHDRAWAL_LIMIT": 3
     }
 
     print("\nAccount created successfully")
     print(new_account)
     user["accounts"].append(new_account)
     print(users)
+    return select_account(document=document)
+
+
+def select_account(*, document):
+    selected_user = {}
+    for user in users:
+        if user["document"] == document:
+            selected_user = user
+        else:
+            print("\nUser not found")
+            return initiate()
+
+        print(f"\n=== Welcome to your banking account, {selected_user['name']}. ===\n")
+        print("Please select an option:")
+        print("1 - Create a new account")
+        for i, account in enumerate(selected_user['accounts'], start=2):
+            print(f"{i} - Agency: {account['agency']}, Account: {account['account_number']}")
+        print(f"{len(selected_user['accounts']) + 2} - Back to main menu")
+
+        option = input()
+
+        if option == '1':
+            create_account(document)
+        elif 2 <= int(option) <= len(selected_user['accounts']) + 1:
+            selected_account = selected_user['accounts'][int(option) - 2]
+            return banking(selected_account)
+        elif option == str(len(selected_user['accounts']) + 2):
+            return initiate()
+        else:
+            print("Invalid option, please try again.")
+            return select_account(document=document)
+
+
+def banking(selected_account):
+    print(f"""\nAgency: {selected_account["agency"]}, Account: {selected_account["account_number"]}""")
+    print(users)
     return
-
-    # return banking(
-
-# def banking():
-#     selected_user = {}
-#     for user in users:
-#         if user["document"] == document:
-#             selected_user = user
-#     print("Selected user is: ", selected_user)
-#     return initiate()
 
 
 initiate()
