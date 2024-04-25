@@ -62,6 +62,8 @@ Document - only numbers (i.e. 12345678901)
 
 users = []
 
+# Initiate the app
+
 
 def initiate():
     option = input(app_menu)
@@ -69,7 +71,7 @@ def initiate():
     if (option == "1"):
         return create_user()
     elif (option == "2"):
-        print("Will access the account")
+        login_user(document=input("Enter your document number: "))
     elif (option == "3"):
         print("Thanks for using DIO Bank 2, bye!")
         return
@@ -78,6 +80,8 @@ def initiate():
         return initiate()
 
     return
+
+# Create a user
 
 
 def create_user():
@@ -119,6 +123,8 @@ def create_user():
         print("\nInvalid option")
         return initiate()
 
+# Create an account
+
 
 def create_account(document):
     print("\nCreating account")
@@ -146,6 +152,22 @@ def create_account(document):
     user["accounts"].append(new_account)
     print(users)
     return select_account(document=document)
+
+# Log the user in
+
+
+def login_user(*, document):
+    user = {}
+    for user in users:
+        if user["document"] == document:
+            user = user
+    if not user:
+        print("\nUser not found")
+        return initiate()
+
+    return select_account(document=document)
+
+# Let the user select an account
 
 
 def select_account(*, document):
