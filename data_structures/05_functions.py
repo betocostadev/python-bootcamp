@@ -79,3 +79,94 @@ show_poem("The Raven",
           "Over many a quaint and curious volume of forgotten lore",
           author="Edgar Allan Poe",
           year=1845)
+
+
+print("\n=== Lambda functions ===")
+# Lambda functions are anonymous functions that can be defined in a single line
+# Lambda functions can have any number of arguments, but can only have one expression
+# Lambda functions are often used as arguments to higher-order functions
+# Lambda functions can be assigned to variables, but are usually used inline
+# Lambda functions are useful for simple, short functions that don't need a name
+
+
+def double(x):
+    return x * 2
+
+
+print(double(1500))
+
+
+print("\n=== Many arguments ===")
+# Functions can accept many arguments:
+# def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
+#       -----------    ----------     ----------
+#         |             |                  |
+#         |        Positional or keyword   |
+#         |                                - Keyword only
+#          -- Positional only
+
+
+def create_car(make, model, year, /, color, *, engine, transmission="Manual"):
+    return f"Car: {year} {make} {model} {color} {engine} {transmission}"
+
+# The arguments before the / are positional only
+# The arguments after the * are keyword only
+# The arguments between / and * can be positional or keyword
+
+
+print(create_car("Kia", "Sportage", 2022, "Red", engine="2.0L", transmission="Automatic"))
+
+# Forcing the arguments to be passed as named arguments
+print("\n=== Forcing named arguments ===")
+
+
+def create_airplane(*, make, model, year):
+    return f"Airplane: {year} {make} {model}"
+
+
+# The arguments after the * are keyword only
+print(create_airplane(make="Boeing", model="747", year=2010))
+
+
+# Closures in Python
+print("\n=== Closures in Python ===")
+# A closure is a function that captures the environment in which it was defined
+# A closure can access variables from the outer function, even after the outer function has finished executing
+# A closure can be used to create a function that returns other functions
+
+
+def outer_function(*, subject):
+    message = f"I'm learning {subject}!"
+
+    def inner_function():
+        print(message)
+
+    return inner_function
+
+
+outer_function(subject="Python")()
+
+
+print("\n=== Higher-order functions ===")
+# Higher-order functions are functions that accept other functions as arguments
+# Higher-order functions can also return functions as output
+
+
+def sum_numbers(a, b):
+    return a + b
+
+
+def subtract_numbers(a, b):
+    return a - b
+
+
+def show_calc_function(a, b, *, operation):
+    if operation == "sum":
+        return sum_numbers(a, b)
+    elif operation == "subtract":
+        return subtract_numbers(a, b)
+    else:
+        return None
+
+
+print(show_calc_function(97, 433, operation="sum"))
