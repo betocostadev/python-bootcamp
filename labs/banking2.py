@@ -76,7 +76,7 @@ users = []
 # Initiate the app
 
 
-def initiate():
+def main():
     option = input(app_menu)
 
     if (option == "1"):
@@ -88,7 +88,7 @@ def initiate():
         return
     else:
         print("Invalid option")
-        return initiate()
+        return main()
 
     return
 
@@ -102,7 +102,7 @@ def create_user():
     for user in users:
         if user["document"] == document:
             print("\nUser already exists")
-            return initiate()
+            return main()
 
     name = input("Enter your name: ")
     birth_date = input("Enter your birth date (i.e. 01/04/1986): ")
@@ -132,7 +132,7 @@ def create_user():
         return create_user()
     else:
         print("\nInvalid option")
-        return initiate()
+        return main()
 
 # Create an account
 
@@ -170,7 +170,7 @@ def login_user(*, document):
             user = user
     if not user:
         print("\nUser not found")
-        return initiate()
+        return main()
 
     return select_account(document=document)
 
@@ -184,7 +184,7 @@ def select_account(*, document):
             selected_user = user
         else:
             print("\nUser not found")
-            return initiate()
+            return main()
 
         print(f"\n=== Welcome to your banking account, {selected_user['name']}. ===\n")
         print("Please select an option:")
@@ -204,7 +204,7 @@ def select_account(*, document):
         elif option == str(len(selected_user['accounts']) + 2):
             return view_accounts(selected_user)
         elif option == str(len(selected_user['accounts']) + 3):
-            return initiate()
+            return main()
         else:
             print("Invalid option, please try again.")
             return select_account(document=document)
@@ -224,7 +224,7 @@ def view_accounts(selected_user):
     if (option == "1"):
         return select_account(document=selected_user['document'])
     elif (option == "2"):
-        return initiate()
+        return main()
     else:
         print("Invalid option")
         return view_accounts(selected_user)
@@ -234,6 +234,10 @@ def view_accounts(selected_user):
 
 def banking(selected_account):
     print(f"""\nAgency: {selected_account["agency"]}, Account: {selected_account["account_number"]}""")
+    selected_user = {}
+    for user in users:
+        if user["document"] == selected_account["user"]:
+            selected_user = user
 
     def deposit(selected_account):
         deposit_amount = float(input("Enter the amount to deposit: "))
@@ -249,19 +253,22 @@ def banking(selected_account):
 
     def withdraw(selected_account):
         withdrawal_amount = float(input("Enter the amount to withdraw: "))
+        invalid_amount = withdrawal_amount <= 0
         withdrawal_day_limit_reached = selected_account["withdrawal_count_today"] >= \
             selected_account["withdrawal_limit_per_day"]
+        insufficient_funds = withdrawal_amount > selected_account["balance"]
+        withdrawal_amount_exceeds_limit = withdrawal_amount > selected_account["limit"]
 
-        if withdrawal_amount <= 0:
+        if invalid_amount:
             print("Invalid amount")
             return withdraw(selected_account)
         elif withdrawal_day_limit_reached:
             print("\nWithdrawal limit reached for today")
             return banking(selected_account)
-        elif withdrawal_amount > selected_account["balance"]:
+        elif insufficient_funds:
             print("\nInsufficient funds")
             return banking(selected_account)
-        elif withdrawal_amount > selected_account["limit"]:
+        elif withdrawal_amount_exceeds_limit:
             print("\nWithdrawal limit exceeded")
             return banking(selected_account)
         else:
@@ -290,13 +297,13 @@ def banking(selected_account):
     elif (option == "4"):
         return select_account(document=selected_account["user"])
     elif (option == "5"):
-        return initiate()
+        return main()
     elif (option == "6"):
-        print("Thanks for using DIO Bank 2, bye!")
+        print(f"Thanks for using DIO Bank 2, {selected_user['name']}, bye!")
         return
     else:
         print("Invalid option")
         return banking(selected_account)
 
 
-initiate()
+main()
