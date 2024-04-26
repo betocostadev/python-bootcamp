@@ -9,7 +9,7 @@
 # Street, number - neighborhood - city/state
 # Only document number must be registered
 # Only one account per user (Document - CPF)
-# User can have more than one banking account - Account 1: 01, account 2: 02, etc.
+# User can have more than one banking account - Account 1: 1, account 2: 2, etc.
 # Document is a string and must have only numbers
 
 # Account
@@ -24,18 +24,11 @@
 # agency, account_number, user (document)
 # Account agency must be 0001
 
-
 # Other features:
 # Deposit money
 # Withdraw money
-# Check balance
+# Check statements
 # The system will allow the user to withdraw 3 times a day with a maximum of 500 per withdrawal.
-
-balance = 0
-limit = 500
-statements = ""
-withdrawal_count = 0
-WITHDRAWAL_LIMIT = 3
 
 app_menu = """
 ================ Welcome to DIO Bank 2 =================
@@ -50,15 +43,33 @@ Please enter the following information:
 Document - only numbers (i.e. 12345678901)
 """
 
-# def make_withdrawal(*, balance, value, statements, limit, num_withdrawals, withdrawal_limit):
-#     return balance, statements
+banking_menu = """
+================ Account options =================
+Press a number to select an option
+    1 - Deposit
+    2 - Withdraw
+    3 - Check statements
+    4 - Back to accounts
+    5 - Back to main menu
+    6 - Exit
+"""
 
-# def make_deposit(balance, value, statements):
-#     return balance, statements
+account_info_menu = """
+Press a number to select an option
+    1 - Back to accounts
+    2 - Back to main menu
+"""
 
-# 1 - Deposit
-# 2 - Withdraw
-# 3 - Statements
+ACCOUNT_TEMPLATE = {
+    "agency": "0001",
+    "account_number": "",
+    "user": "",
+    "balance": 0,
+    "statements": [],
+    "limit": 500,
+    "withdrawal_count_today": 0,
+    "withdrawal_limit_per_day": 3
+}
 
 users = []
 
@@ -101,7 +112,7 @@ def create_user():
           f"Name: {name}\nBirth date: {birth_date}\nDocument: {document}\nAddress: {address}")
     confirm = input("\nDo you want to confirm? (y/n)")
 
-    if (confirm == "y"):
+    if (confirm == "y".lower() or confirm == "y".upper()):
 
         accounts = list()
         new_user = {
@@ -113,7 +124,7 @@ def create_user():
         }
 
         users.append(new_user)
-        print("\nUser created successfully")
+        print(f"\nUser {new_user['name']} created successfully!")
         print(users)
         return create_account(document)
     elif (confirm == "n"):
@@ -134,23 +145,19 @@ def create_account(document):
         if user["document"] == document:
             user = user
 
-    agency = "0001"
     account_number = len(user["accounts"]) + 1
 
-    new_account = {
-        "agency": agency,
-        "account_number": account_number,
-        "user": document,
-        "balance": 0,
-        "statements": [],
-        "withdrawal_count_today": 0,
-        "WITHDRAWAL_LIMIT": 3
-    }
+    new_account = ACCOUNT_TEMPLATE.copy()
+    new_account["account_number"] = account_number
+    new_account["user"] = document
 
-    print("\nAccount created successfully")
-    print(new_account)
+    print("\nAccount created successfully!")
+    print(f"\nAgency: {new_account['agency']}",
+          f"\nAccount: {new_account['account_number']}",
+          f"\nBalance: {new_account['balance']}")
+
     user["accounts"].append(new_account)
-    print(users)
+
     return select_account(document=document)
 
 # Log the user in
@@ -184,7 +191,8 @@ def select_account(*, document):
         print("1 - Create a new account")
         for i, account in enumerate(selected_user['accounts'], start=2):
             print(f"{i} - Agency: {account['agency']}, Account: {account['account_number']}")
-        print(f"{len(selected_user['accounts']) + 2} - Back to main menu")
+        print(f"{len(selected_user['accounts']) + 2} - View accounts information")
+        print(f"{len(selected_user['accounts']) + 3} - Back to main menu")
 
         option = input()
 
@@ -194,16 +202,101 @@ def select_account(*, document):
             selected_account = selected_user['accounts'][int(option) - 2]
             return banking(selected_account)
         elif option == str(len(selected_user['accounts']) + 2):
+            return view_accounts(selected_user)
+        elif option == str(len(selected_user['accounts']) + 3):
             return initiate()
         else:
             print("Invalid option, please try again.")
             return select_account(document=document)
 
+# View the user accounts information
+
+
+def view_accounts(selected_user):
+    print("\n=== Your accounts information ===")
+    print(f"\nUser: {selected_user['name']}, Document: {selected_user['document']}")
+    for i, account in enumerate(selected_user['accounts'], start=1):
+        print(f"\nAccount {i} - Agency: {account['agency']}, Account: {account['account_number']}, "
+              f"Balance: {account['balance']}")
+
+    option = input(account_info_menu)
+
+    if (option == "1"):
+        return select_account(document=selected_user['document'])
+    elif (option == "2"):
+        return initiate()
+    else:
+        print("Invalid option")
+        return view_accounts(selected_user)
+
+# Banking functions
+
 
 def banking(selected_account):
     print(f"""\nAgency: {selected_account["agency"]}, Account: {selected_account["account_number"]}""")
-    print(users)
-    return
+
+    def deposit(selected_account):
+        deposit_amount = float(input("Enter the amount to deposit: "))
+        if deposit_amount <= 0:
+            print("Invalid amount")
+            return deposit(selected_account)
+
+        selected_account["balance"] += deposit_amount
+        deposit_statement = f"Deposited: R${deposit_amount}, Balance: R${selected_account['balance']}"
+        selected_account["statements"].append(deposit_statement)
+        print(deposit_statement)
+        return banking(selected_account)
+
+    def withdraw(selected_account):
+        withdrawal_amount = float(input("Enter the amount to withdraw: "))
+        withdrawal_day_limit_reached = selected_account["withdrawal_count_today"] >= \
+            selected_account["withdrawal_limit_per_day"]
+
+        if withdrawal_amount <= 0:
+            print("Invalid amount")
+            return withdraw(selected_account)
+        elif withdrawal_day_limit_reached:
+            print("\nWithdrawal limit reached for today")
+            return banking(selected_account)
+        elif withdrawal_amount > selected_account["balance"]:
+            print("\nInsufficient funds")
+            return banking(selected_account)
+        elif withdrawal_amount > selected_account["limit"]:
+            print("\nWithdrawal limit exceeded")
+            return banking(selected_account)
+        else:
+            selected_account["withdrawal_count_today"] += 1
+            selected_account["balance"] -= withdrawal_amount
+            withdrawal_statement = f"Withdrawn: R${withdrawal_amount}, Balance: R${selected_account['balance']}"
+            selected_account["statements"].append(withdrawal_statement)
+            print(withdrawal_statement)
+            return banking(selected_account)
+
+    def show_statements(selected_account):
+        print("\n========== Statements ==========")
+        for statement in selected_account["statements"]:
+            print(statement)
+        return banking(selected_account)
+
+    option = input(banking_menu)
+
+    if (option == "1"):
+        return deposit(selected_account)
+    elif (option == "2"):
+        print("Withdrawal")
+        return withdraw(selected_account)
+    elif (option == "3"):
+        return show_statements(selected_account)
+    elif (option == "4"):
+        return select_account(document=selected_account["user"])
+    elif (option == "5"):
+        return initiate()
+    elif (option == "6"):
+        print("Thanks for using DIO Bank 2, bye!")
+        return
+    else:
+        print("Invalid option")
+        return banking(selected_account)
 
 
 initiate()
