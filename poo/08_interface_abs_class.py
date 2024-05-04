@@ -16,6 +16,7 @@
 
 # Let's see an example of an interface and an abstract class in Python.
 from abc import ABC, abstractmethod
+from datetime import date
 
 
 print("======== Python - Introduction to Object Oriented Programming in Python ========")
@@ -84,3 +85,35 @@ print(f"Perimeter: {circle.perimeter()}")
 # When we run the code, we create instances of the Rectangle and Circle classes
 # and call the area() and perimeter() methods to calculate the area and perimeter of the shapes.
 # The output shows the area and perimeter of the rectangle and circle objects.
+
+
+# Using class methods
+print("\nUsing class methods\n")
+
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @classmethod
+    def from_birth_year(cls, name, birth_year):
+        return cls(name, date.today().year - birth_year)
+
+    @staticmethod
+    def is_adult(age):
+        return age > 18
+
+    def display(self):
+        print(f"{self.name} is {self.age} years old")
+
+
+alice = Person("Alice", 25)
+# Note that you can call the method from_birth_year without creating an instance of the class.
+john = Person.from_birth_year("John", 1990)
+
+alice.display()
+john.display()
+
+print(f"Is Alice an adult? {Person.is_adult(alice.age)}")
+print(f"Is John an adult? {Person.is_adult(john.age)}")
