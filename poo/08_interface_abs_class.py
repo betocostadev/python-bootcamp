@@ -89,6 +89,60 @@ print(f"Perimeter: {circle.perimeter()}")
 # The output shows the area and perimeter of the rectangle and circle objects.
 
 
+# Using a remote control class to show another example
+print("\nUsing a remote control class to show another example\n")
+
+
+class RemoteControl(ABC):
+    @abstractmethod
+    def turn_on(self):
+        raise NotImplementedError("Subclass must implement abstract method")
+
+    @abstractmethod
+    def turn_off(self):
+        pass
+
+    # Abstract properties
+    @property
+    def brand(self):
+        raise NotImplementedError("Subclass must implement abstract method")
+
+
+class TVRemoteControl(RemoteControl):
+    def turn_on(self):
+        return "TV turned on"
+
+    def turn_off(self):
+        return "TV turned off"
+
+    @property
+    def brand(self):
+        return "Samsung"
+
+
+class ACRemoteControl(RemoteControl):
+    def turn_on(self):
+        return "AC turned on"
+
+    def turn_off(self):
+        return "AC turned off"
+
+    @property
+    def brand(self):
+        return "LG"
+
+
+tvremote = TVRemoteControl()
+acremote = ACRemoteControl()
+
+print(tvremote.turn_on())
+print(tvremote.turn_off())
+print(tvremote.brand)
+print(acremote.turn_on())
+print(acremote.turn_off())
+print(acremote.brand)
+
+
 # Using class methods
 print("\nUsing class methods\n")
 
