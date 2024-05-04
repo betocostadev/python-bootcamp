@@ -23,6 +23,8 @@ print("======== Python - Introduction to Object Oriented Programming in Python =
 print("\n=== Interfaces and Abstract Classes ===\n")
 
 
+# Using an interface
+# ABC stands for Abstract Base Class
 class Shape(ABC):
     @abstractmethod
     def area(self):
@@ -96,10 +98,20 @@ class Person:
         self.name = name
         self.age = age
 
+    # A class method is a method that is bound to the class and not the object of the class.
+    # They have the access to the state of the class as it takes
+    # a class parameter that points to the class and not the object instance.
+    # It can modify a class state that would apply across all the instances of the class.
+    # For example, it can modify a class variable that will be applicable to all the instances.
+    # It is defined using the @classmethod decorator.
     @classmethod
     def from_birth_year(cls, name, birth_year):
         return cls(name, date.today().year - birth_year)
 
+    # A static method is also a method that is bound to the class and not the object of the class.
+    # A static method can't access or modify class state.
+    # It is present in a class because it makes sense for the method to be present in class.
+    # It is defined using the @staticmethod decorator.
     @staticmethod
     def is_adult(age):
         return age > 18
