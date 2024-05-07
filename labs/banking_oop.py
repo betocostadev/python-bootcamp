@@ -3,7 +3,7 @@
 # This system is based in the baking2.py file.
 # The main difference is that we will use OOP concepts to create the system.
 
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 from datetime import datetime
 
 
@@ -60,6 +60,43 @@ class Account:
     @property
     def agency(self):
         return self._agency
+
+    @property
+    def client(self):
+        return self._client
+
+    @property
+    def statements(self):
+        return self._statements
+
+    def withdraw(self, amount):
+        exceed_limit = amount > self._balance
+
+        if exceed_limit:
+            print("@@@ Operation failed! You don't have enough balance to withdraw this amount. @@@")
+
+        elif amount > 0:
+            self._balance -= amount
+            self.statements.add_statement(Transaction(self, -amount))
+            print("=== Operation successful! Withdraw made successfully ===")
+            return True
+
+        else:
+            print("@@@ Operation failed! Invalid amount. @@@")
+
+        return False
+
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+            self.statements.add_statement(Transaction(self, amount))
+            print("=== Operation successful! Deposit made successfully ===")
+            return True
+
+        else:
+            print("@@@ Operation failed! Invalid amount. @@@")
+
+        return False
 
 
 class Transaction:
