@@ -5,6 +5,7 @@
 
 from abc import ABC, abstractmethod
 from datetime import datetime
+# import textwrap
 
 
 class Client:
@@ -20,7 +21,6 @@ class Client:
 
     def add_account(self, account):
         self.accounts.append(account)
-        return f"Account {account} added"
 
 
 class Person(Client):
@@ -40,7 +40,7 @@ class Account:
         self._number = number
         self._agency = "0001"
         self._client = client
-        self.statements = Statements()
+        self._statements = Statements()
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__}: {', '.join([f'{key}: {value}' for key, value in self.__dict__.items()])}"
@@ -133,7 +133,6 @@ class CheckingAccount(Account):
             Account: {self.number}
             Balance: R${self.balance}
             Limit: R${self.limit}
-            Owner: {self.client.name}
             """
 
 
@@ -164,10 +163,9 @@ class Statements:
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
         )
-        return f"Transaction {transaction} added"
 
     def check_statements(self):
-        return self.transactions
+        return self._transactions
 
 
 class Deposit(Transaction):
@@ -204,3 +202,176 @@ class Withdrawal(Transaction):
             return True
         else:
             return False
+
+
+def menu():
+    menu = """\n
+    ========== MENU ==========
+    [d]\tDeposit
+    [w]\tWithdraw
+    [s]\tCheck balance
+    [nc]\tNew Client
+    [l]\tList accounts
+    [na]\tNew Account
+    [q]\tQuit
+    ==========================
+    """
+
+    # return input(textwrap.dedent(menu))
+    return input(menu)
+
+
+def filter_client(document, clients):
+    return [client for client in clients if client.document == document]
+
+
+def get_client_account(client):
+    if not client.accounts:
+        print("No accounts found for this client.")
+        return None
+
+    print(client)
+    return client.accounts[0]
+
+
+def make_deposit(clients):
+    document = input("Enter your document: ")
+    client = filter_client(document, clients)
+
+    if not client:
+        print("@@@ Client not found! @@@")
+        return
+
+    account = get_client_account(client)
+    if not account:
+        print("@@@ Account not found! @@@")
+        return
+
+    amount = float(input("Enter the amount to deposit: "))
+
+    if account:
+        client.make_transaction(account, Deposit(amount))
+
+
+def make_withdraw(clients):
+    document = input("Enter your document: ")
+    client = filter_client(document, clients)
+
+    if not client:
+        print("@@@ Client not found! @@@")
+        return
+
+    account = get_client_account(client)
+    if not account:
+        print("@@@ Account not found! @@@")
+        return
+
+    amount = float(input("Enter the amount to withdraw: "))
+
+    if account:
+        client.make_transaction(account, Withdrawal(amount))
+
+
+def show_statements(clients):
+    document = input("Enter your document: ")
+    client = filter_client(document, clients)
+
+    if not client:
+        print("@@@ Client not found! @@@")
+        return
+
+    print("Will get client account")
+    print(client.accounts)
+
+    account = get_client_account(client)
+    if not account:
+        print("@@@ Account not found! @@@")
+        return
+
+    print("\n ======== STATEMENTS ======== ")
+    transactions = account.statements.check_statements()
+    statements = ""
+    if not transactions:
+        statements = "No transactions found."
+    else:
+        for transaction in transactions:
+            statements += f"{transaction['date']} - {transaction['type']} - {transaction['amount']}\n"
+
+    print(statements)
+    print(f"Balance: {account.balance:.2f}")
+    print(" ============================= ")
+
+
+def create_client(clients):
+    name = input("Enter your name: ")
+    date_birth = input("Enter your date of birth (yyyy-mm-dd): ")
+    document = input("Enter your document: ")
+    address = input("Enter your address: ")
+
+    client = Person(name, date_birth, document, address)
+    clients.append(client)
+    print(f"Client {client.name} added successfully.")
+    return client
+
+
+def list_accounts(accounts):
+    if not accounts:
+        print("@@@ No accounts found! @@@")
+        return
+
+    for account in accounts:
+        print(account)
+
+
+def create_account(account_number, clients, accounts):
+    document = input("Enter your document: ")
+    client = filter_client(document, clients)
+
+    if not client:
+        print("@@@ Client not found! @@@")
+        return
+
+    account = CheckingAccount.new_account(client, account_number)
+    accounts.append(account)
+    print(client)
+    print(accounts)
+    # client.accounts.append(account)
+    print(f"Account {account.number} added successfully.")
+
+
+def main():
+    clients = []
+    accounts = []
+
+    while True:
+        option = menu()
+
+        if option == "d":
+            make_deposit(clients)
+
+        elif option == "w":
+            make_withdraw(clients)
+
+        elif option == "s":
+            show_statements(clients)
+
+        elif option == "nc":
+            create_client(clients)
+
+        elif option == "l":
+            list_accounts(accounts)
+
+        elif option == "na":
+            account_number = len(accounts) + 1
+            create_account(account_number, clients, accounts)
+
+        elif option == "q":
+            print("Quitting...")
+            break
+
+        else:
+            print("Invalid option.")
+            continue
+
+
+main()
