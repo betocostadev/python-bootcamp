@@ -77,8 +77,8 @@ class Account:
 
         elif amount > 0:
             self._balance -= amount
-            self.statements.add_statement(Transaction(self, -amount))
-            print("=== Operation successful! Withdraw made successfully ===")
+            # self.statements.add_statement(Transaction(self, -amount))
+            print("=== Operation successful! Withdraw made successfully. ===")
             return True
 
         else:
@@ -89,7 +89,7 @@ class Account:
     def deposit(self, amount):
         if amount > 0:
             self._balance += amount
-            self.statements.add_statement(Transaction(self, amount))
+            # self.statements.add_statement(Transaction(self, amount))
             print("=== Operation successful! Deposit made successfully ===")
             return True
 
@@ -102,18 +102,18 @@ class Account:
 class CheckingAccount(Account):
     def __init__(self, number, client: Client, limit=500, withdrawal_limit_per_day=3):
         super().__init__(number, client)
-        self.limit = limit
+        self._limit = limit
         self._withdrawal_count_today = 0
         self._withdrawal_limit_per_day = withdrawal_limit_per_day
 
     def withdraw(self, amount):
-        exceed_limit = amount > self.limit
+        exceed_limit = amount > self._limit
         exceed_withdrawal_limit_per_day = self._withdrawal_count_today >= self._withdrawal_limit_per_day
         # number_of_withdrawals_today =
         # len([transaction for transaction in self.statements.transactions if transaction["type"] === Withdrawal])
 
         if exceed_limit:
-            print("@@@ Operation failed! You don't have enough balance to withdraw this amount. @@@")
+            print(f"@@@ Operation failed! Amount is above withdraw limit ({self._limit}). @@@")
 
         elif exceed_withdrawal_limit_per_day:
             print("@@@ Operation failed! You have reached the withdrawal limit for today. @@@")
@@ -129,15 +129,17 @@ class CheckingAccount(Account):
 
     def __str__(self) -> str:
         return f"""\
-            Agency: {self.agency}
-            Account: {self.number}
-            Balance: R${self.balance}
-            Limit: R${self.limit}
-            """
+        Agency: {self.agency}
+        Account: {self.number}
+        Balance: R${self.balance}
+        Limit: R${self._limit}
+        Client: {self.client.name}
+        """
 
 
 class Transaction(ABC):
     @property
+    @abstractmethod
     def amount(self):
         pass
 
@@ -180,7 +182,7 @@ class Deposit(Transaction):
         success = account.deposit(self.amount)
 
         if success:
-            self._account.statements.add_statement(self)
+            account.statements.add_statement(self)
             return True
         else:
             return False
@@ -222,15 +224,14 @@ def menu():
 
 
 def filter_client(document, clients):
-    return [client for client in clients if client.document == document]
+    filtered_clients = [client for client in clients if client.document == document]
+    return filtered_clients[0] if filtered_clients else None
 
 
 def get_client_account(client):
     if not client.accounts:
-        print("No accounts found for this client.")
         return None
 
-    print(client)
     return client.accounts[0]
 
 
@@ -242,15 +243,15 @@ def make_deposit(clients):
         print("@@@ Client not found! @@@")
         return
 
+    amount = float(input("Enter the amount to deposit: "))
+    transaction = Deposit(amount)
+
     account = get_client_account(client)
     if not account:
         print("@@@ Account not found! @@@")
         return
 
-    amount = float(input("Enter the amount to deposit: "))
-
-    if account:
-        client.make_transaction(account, Deposit(amount))
+    client.make_transaction(account, transaction)
 
 
 def make_withdraw(clients):
@@ -279,9 +280,6 @@ def show_statements(clients):
     if not client:
         print("@@@ Client not found! @@@")
         return
-
-    print("Will get client account")
-    print(client.accounts)
 
     account = get_client_account(client)
     if not account:
@@ -319,6 +317,7 @@ def list_accounts(accounts):
         print("@@@ No accounts found! @@@")
         return
 
+    print("\n ======== ACCOUNTS ======== ")
     for account in accounts:
         print(account)
 
@@ -333,9 +332,7 @@ def create_account(account_number, clients, accounts):
 
     account = CheckingAccount.new_account(client, account_number)
     accounts.append(account)
-    print(client)
-    print(accounts)
-    # client.accounts.append(account)
+    client.accounts.append(account)
     print(f"Account {account.number} added successfully.")
 
 
