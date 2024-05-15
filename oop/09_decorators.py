@@ -26,8 +26,6 @@ say_hello()
 
 # The @ symbol is used to apply the decorator to the function.
 # The following code is equivalent to the previous code.
-
-
 print("\n=== Using the @ symbol ===\n")
 
 
@@ -57,16 +55,17 @@ def calculate(operation):
             return "Error: Division by zero!"
         return a / b
 
-    if operation == "+":
-        return sum
-    elif operation == "-":
-        return subtract
-    elif operation == "*":
-        return multiply
-    elif operation == "/":
-        return divide
-    else:
-        return "Error: Invalid operation!"
+    match operation:
+        case "+":
+            return sum
+        case "-":
+            return subtract
+        case "*":
+            return multiply
+        case "/":
+            return divide
+        case _:
+            return "Invalid operation!"
 
 
 print(calculate("+")(10, 5))
@@ -80,3 +79,16 @@ def calculate_decorator(func):
 
 
 calculate_decorator(calculate("+"))(10, 5)
+
+
+print("\n=== Using the @ symbol ===\n")
+
+
+@calculate_decorator
+def sum(a, b):
+    return a + b
+
+
+# Running the function sum
+# Note that the decorator calculate_decorator is being applied to the function sum
+sum(10, 5)
