@@ -9,6 +9,9 @@ print("\n=== Challenge: Bike Factory ===\n")
 
 
 class Bike:
+    # Add a docstring to the class
+    """Class to represent a Bike"""
+
     def __init__(self, model, color, year, price) -> None:
         self.model = model
         self.color = color
