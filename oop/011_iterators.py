@@ -12,6 +12,9 @@
 # Iterators are commonly used in loops to iterate over the elements of a sequence.
 # An example is when reading a file or a list of elements.
 
+# There are cases where a list can be huge and we don't want to load all the elements into memory.
+# In this case, we can use an iterator to read the elements one by one.
+
 print("======== Python - Introduction to Object Oriented Programming in Python ========")
 print("\n=== Iterators ===\n")
 
@@ -27,6 +30,8 @@ print(next(myit))
 
 print("\n=== Create an iterator ===\n")
 
+
+# Iterator classes must have the __iter__() and __next__() methods.
 
 class MyNumbers:
     def __iter__(self):
@@ -56,3 +61,26 @@ print(next(newit))
 print("\n=== Using another array only to keep iterating over the numbers ===\n")
 for number in newit:
     print(number)
+
+
+print("\n=== Another example iterating with numbers ===\n")
+
+
+class MyNumIterator:
+    def __init__(self, nums: list[int]):
+        self.nums = nums
+        self.counter = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.counter < len(self.nums):
+            self.counter += 1
+            return self.nums[self.counter - 1]
+        else:
+            raise StopIteration
+
+
+for num in MyNumIterator([10, 20, 30]):
+    print(num)
