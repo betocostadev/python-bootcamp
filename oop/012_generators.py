@@ -54,3 +54,18 @@ def fibonacci(n):
 
 for number in fibonacci(10):
     print(number)
+
+
+# Using another example with a generator function
+
+def multiplyer_gen(numbers: list[int]):
+    for number in numbers:
+        yield number * 2
+
+
+print("\n=== Using a generator with a function to multiply some numbers ===\n")
+
+numbers = [1, 2, 3, 4, 5]
+
+for number in multiplyer_gen(numbers):
+    print(number)
