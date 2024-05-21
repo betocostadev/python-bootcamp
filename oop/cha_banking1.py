@@ -34,6 +34,10 @@ class Client:
         return f"{self.__class__.__name__}: {', '.join([f'{key}: {value}' for key, value in self.__dict__.items()])}"
 
     def make_transaction(self, account, transaction):
+        if len(account.statements.transactions_today()) >= 10:
+            print("@@@ Operation failed! You have reached the transactions limit for today. @@@")
+            return
+
         transaction.register(account)
 
     def add_account(self, account):
@@ -185,6 +189,15 @@ class Statements:
 
     def check_statements(self):
         return self._transactions
+
+    def transactions_today(self):
+        actual_date = datetime.now().date()
+        transactions = []
+        for transaction in self._transactions:
+            date_transaction = datetime.strptime(transaction["date"], "%Y-%m-%d %H:%M:%S").date()
+            if date_transaction == actual_date:
+                transactions.append(transaction)
+        return transactions
 
 
 class Deposit(Transaction):
