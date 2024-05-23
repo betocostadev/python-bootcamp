@@ -44,6 +44,20 @@ print(f"Diference in time: {datetime_now - datetime_code}")
 # Below we are using timedelta to subtract 2 hours and 2 days from the current time.
 print(f"Subtracting 2 hours and 2 days using timedelta: {datetime_now - timedelta(hours=2, days=2)}")
 
+date_birthday = datetime(1986, 4, 1, 18, 0, 0)
+days_since_birthday = datetime_now - date_birthday
+months_since_birthday = days_since_birthday.days // 30
+years_since_birthday = months_since_birthday // 12
+
+print("""
+===== Life Stats =====
+Days since my birthday: {day}
+Months since my birthday: {month}
+Years since my birthday: {year}
++++++++++++++++++++++++
+""".format(day=days_since_birthday, month=months_since_birthday, year=years_since_birthday))
+
+
 # Creating a time object
 # The time class is used to represent a time.
 # The time class takes three arguments: hour, minute, and second.
@@ -69,3 +83,8 @@ gmt = timezone(timedelta(hours=1), "GMT")
 gmt_time = datetime.now(gmt)
 print(f"GMT timezone: {gmt}")
 print(f"GMT time: {gmt_time}")
+
+sp_timezone = timezone(timedelta(hours=-3), "America/Sao_Paulo")
+sp_time = datetime.now(sp_timezone)
+print(f"America/Sao_Paulo timezone: {sp_timezone}")
+print(f"America/Sao_Paulo time: {sp_time}")
