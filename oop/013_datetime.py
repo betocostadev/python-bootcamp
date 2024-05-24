@@ -88,3 +88,10 @@ sp_timezone = timezone(timedelta(hours=-3), "America/Sao_Paulo")
 sp_time = datetime.now(sp_timezone)
 print(f"America/Sao_Paulo timezone: {sp_timezone}")
 print(f"America/Sao_Paulo time: {sp_time}")
+
+
+print("\n=== More examples using timedelta ===\n")
+date1 = datetime(2024, 5, 23, 12, 0, 0)
+print(f"Date 1: {date1}")
+date = date1 + timedelta(weeks=1, days=2, hours=3, minutes=4, seconds=5)
+print(f"Date changed for next week and 3 hours more: {date}")
