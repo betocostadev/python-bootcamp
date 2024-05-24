@@ -4,7 +4,28 @@
 from datetime import datetime, timedelta
 
 print("\n======== Python - Introduction to Object Oriented Programming in Python ========\n")
-print("Dealing with timedelta")
+print("======== Dates and Times ========")
+
+print("\nstrftime() and strptime() methods\n")
+# strftime() method
+default_date = datetime.now()
+print("Default date: ", default_date)
+br_date = default_date.strftime("%d/%m/%Y %H:%M:%S")
+print("Brazilian date: ", br_date)
+
+# strptime() method
+print("\nstrptime() method\n")
+date_str = "23/05/2024 15:30:00"
+# date_str = date_str + timedelta(hours=3)  # We can't add a timedelta to a string
+date_obj = datetime.strptime(date_str, "%d/%m/%Y %H:%M:%S")
+print("Date object: ", date_obj)
+print("Date object type: ", type(date_obj))
+print("Date object + 3 hours: ", date_obj + timedelta(hours=3))
+print("Date object formated with month name: ", date_obj.strftime("%d %B %Y %H:%M:%S"))
+mask_ptbr = "%a %d %B %Y"
+print("Date object with week day and month: ", date_obj.strftime(mask_ptbr))
+
+print("\n === Dealing with timedelta ===")
 
 options = """
 ============== Car Washer - Options ==============

@@ -9,6 +9,7 @@
 # timezone: A class that represents a time zone.
 
 from datetime import date, time, datetime, timedelta, timezone
+import pytz  # type: ignore
 
 print("======== Python - Introduction to Object Oriented Programming in Python ========")
 print("=== Dates and Times ===")
@@ -89,9 +90,18 @@ sp_time = datetime.now(sp_timezone)
 print(f"America/Sao_Paulo timezone: {sp_timezone}")
 print(f"America/Sao_Paulo time: {sp_time}")
 
+date_lithuania = datetime.now(timezone(timedelta(hours=3), "Europe/Vilnius"))
+print(f"Europe/Vilnius timezone: {date_lithuania}")
+
 
 print("\n=== More examples using timedelta ===\n")
 date1 = datetime(2024, 5, 23, 12, 0, 0)
 print(f"Date 1: {date1}")
 date = date1 + timedelta(weeks=1, days=2, hours=3, minutes=4, seconds=5)
 print(f"Date changed for next week and 3 hours more: {date}")
+
+print("\n=== Dealing with timezones using pytz ===\n")
+date_now_amsterdam = datetime.now(pytz.timezone('Europe/Amsterdam'))
+date_now_tokyo = datetime.now(pytz.timezone('Asia/Tokyo'))
+print(f"Amsterdam time: {date_now_amsterdam}")
+print(f"Tokyo time: {date_now_tokyo}")
