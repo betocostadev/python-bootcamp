@@ -1,0 +1,4 @@
+=========== EXAMPLE - TXT File ===========
+Name: Beto, Years: 38
+Name: Joaquim, Years: 0
+Name: Ragnar, Years: 0
