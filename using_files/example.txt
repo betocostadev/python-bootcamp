@@ -2,3 +2,5 @@
 Name: Beto, Years: 38
 Name: Joaquim, Years: 0
 Name: Ragnar, Years: 0
+Name: Dovahkin, Years: 465
+Name: Vecna, Years: 160
