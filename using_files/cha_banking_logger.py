@@ -12,7 +12,10 @@
 
 from abc import ABC, abstractmethod
 from datetime import datetime
+from pathlib import Path
 # import textwrap
+
+ROOT_PATH = Path(__file__).parent
 
 
 class AccountIterator:
@@ -64,12 +67,15 @@ class Person(Client):
         self.date_birth = date_birth
         self.document = document
 
+    def __repr__(self) -> str:
+        return f"<Client: ({self.document})>"
+
     def __str__(self) -> str:
         return f"{super().__str__()} - Address: {self.address}"
 
 
 class Account:
-    def __init__(self, number, client: Client):
+    def __init__(self, number, client: Person):
         self._balance = 0
         self._number = number
         self._agency = "0001"
@@ -132,6 +138,9 @@ class Account:
 
         return False
 
+    def __repr__(self) -> str:
+        return f"""<{self.__class__.__name__}: ('{self.agency}', '{self.number}', '{self.client.name}')>"""
+
 
 class CheckingAccount(Account):
     def __init__(self, number, client: Client, limit=500, withdrawal_limit_per_day=3):
@@ -143,8 +152,6 @@ class CheckingAccount(Account):
     def withdraw(self, amount):
         exceed_limit = amount > self._limit
         exceed_withdrawal_limit_per_day = self._withdrawal_count_today >= self._withdrawal_limit_per_day
-        # number_of_withdrawals_today =
-        # len([transaction for transaction in self.statements.transactions if transaction["type"] === Withdrawal])
 
         if exceed_limit:
             print(f"@@@ Operation failed! Amount is above withdraw limit ({self._limit}). @@@")
@@ -257,7 +264,17 @@ class Withdrawal(Transaction):
 def log_transaction(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
-        print(f"{datetime.now().strftime("%a %d %B %Y - %H:%M")}h: {func.__name__.upper()}")
+        date_hour = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log_message = (
+            f"[{date_hour}] Function '{func.__name__.upper()}' called with arguments: "
+            f"{args} and {kwargs}. Returned: {result}\n"
+        )
+        print(f"{date_hour}h: {func.__name__.upper()}")
+        try:
+            with open(ROOT_PATH / 'log.txt', 'a') as log_file:
+                log_file.write(log_message)
+        except FileNotFoundError as e:
+            print("File not found: ", e)
         return result
     return wrapper
 
@@ -275,7 +292,6 @@ def menu():
 ==========================
 """
 
-    # return input(textwrap.dedent(menu))
     return input(menu)
 
 
@@ -351,7 +367,6 @@ def show_statements(clients):
     if not transactions:
         statements = "No transactions found."
     else:
-        # Looping through the transactions in generator
         for transaction in account.statements.generate_report():
             statements += f"{transaction['date']} - {transaction['type']} - {transaction['amount']}\n"
 

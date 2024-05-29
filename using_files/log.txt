@@ -1,0 +1,10 @@
+[2024-05-29 13:34:12] Function 'CREATE_CLIENT' called with arguments: ([<Client: (9090)>],) and {}. Returned: Person: address: Rua Creeps Lops Kuts de Mutz, 450, accounts: [], name: Beto, date_birth: 1986-04-01, document: 9090 - Address: Rua Creeps Lops Kuts de Mutz, 450
+[2024-05-29 13:34:18] Function 'CREATE_ACCOUNT' called with arguments: (1, [<Client: (9090)>], [<CheckingAccount: ('0001', '1', 'Beto')>]) and {}. Returned: None
+[2024-05-29 13:34:26] Function 'MAKE_DEPOSIT' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:34:30] Function 'MAKE_DEPOSIT' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:34:38] Function 'MAKE_DEPOSIT' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:34:43] Function 'MAKE_WITHDRAW' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:34:49] Function 'MAKE_WITHDRAW' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:34:54] Function 'MAKE_WITHDRAW' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:35:08] Function 'SHOW_STATEMENTS' called with arguments: ([<Client: (9090)>],) and {}. Returned: None
+[2024-05-29 13:35:21] Function 'CREATE_ACCOUNT' called with arguments: (2, [<Client: (9090)>], [<CheckingAccount: ('0001', '1', 'Beto')>, <CheckingAccount: ('0001', '2', 'Beto')>]) and {}. Returned: None
