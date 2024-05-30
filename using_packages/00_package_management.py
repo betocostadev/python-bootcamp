@@ -4,6 +4,15 @@
 print("\n======== Python - Learning about Packages ========\n")
 print("======== Managing packages ========")
 
+print(
+    """
+Some information about package managers like:
+- pip
+- pipenv
+- poetry
+"""
+)
+
 # Packages are a way to organize Python modules
 # They are directories with a special __init__.py file
 # This file can be empty, but it indicates that the directory is a Python package

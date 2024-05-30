@@ -5,6 +5,7 @@
 
 from abc import ABC, abstractmethod
 from datetime import datetime
+
 # import textwrap
 
 
@@ -35,7 +36,9 @@ class Client:
 
     def make_transaction(self, account, transaction):
         if len(account.statements.transactions_today()) >= 10:
-            print("@@@ Operation failed! You have reached the transactions limit for today. @@@")
+            print(
+                "@@@ Operation failed! You have reached the transactions limit for today. @@@"
+            )
             return
 
         transaction.register(account)
@@ -45,7 +48,13 @@ class Client:
 
 
 class Person(Client):
-    def __init__(self, name: str, date_birth: datetime, document: str, address: str, ):
+    def __init__(
+        self,
+        name: str,
+        date_birth: datetime,
+        document: str,
+        address: str,
+    ):
         super().__init__(address)
         self.name = name
         self.date_birth = date_birth
@@ -94,7 +103,9 @@ class Account:
         exceed_limit = amount > self._balance
 
         if exceed_limit:
-            print("@@@ Operation failed! You don't have enough balance to withdraw this amount. @@@")
+            print(
+                "@@@ Operation failed! You don't have enough balance to withdraw this amount. @@@"
+            )
 
         elif amount > 0:
             self._balance -= amount
@@ -129,15 +140,21 @@ class CheckingAccount(Account):
 
     def withdraw(self, amount):
         exceed_limit = amount > self._limit
-        exceed_withdrawal_limit_per_day = self._withdrawal_count_today >= self._withdrawal_limit_per_day
+        exceed_withdrawal_limit_per_day = (
+            self._withdrawal_count_today >= self._withdrawal_limit_per_day
+        )
         # number_of_withdrawals_today =
         # len([transaction for transaction in self.statements.transactions if transaction["type"] === Withdrawal])
 
         if exceed_limit:
-            print(f"@@@ Operation failed! Amount is above withdraw limit ({self._limit}). @@@")
+            print(
+                f"@@@ Operation failed! Amount is above withdraw limit ({self._limit}). @@@"
+            )
 
         elif exceed_withdrawal_limit_per_day:
-            print("@@@ Operation failed! You have reached the withdrawal limit for today. @@@")
+            print(
+                "@@@ Operation failed! You have reached the withdrawal limit for today. @@@"
+            )
 
         elif amount > 0:
             self._withdrawal_count_today += 1
@@ -183,7 +200,7 @@ class Statements:
             {
                 "type": transaction.__class__.__name__,
                 "amount": transaction.amount,
-                "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             }
         )
 
@@ -194,7 +211,9 @@ class Statements:
         actual_date = datetime.now().date()
         transactions = []
         for transaction in self._transactions:
-            date_transaction = datetime.strptime(transaction["date"], "%Y-%m-%d %H:%M:%S").date()
+            date_transaction = datetime.strptime(
+                transaction["date"], "%Y-%m-%d %H:%M:%S"
+            ).date()
             if date_transaction == actual_date:
                 transactions.append(transaction)
         return transactions

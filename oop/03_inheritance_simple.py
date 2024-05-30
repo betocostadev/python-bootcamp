@@ -4,7 +4,9 @@
 # It refers to defining a new class with little or no modification to an existing class.
 # The new class is called derived (or child) class and the one from which it inherits
 # is called the base (or parent) class.
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Simple Inheritance ===\n")
 
 
@@ -44,7 +46,11 @@ class Truck(Vehicle):
         return f"{item} unloaded"
 
     def has_cargo(self):
-        print("Truck is not loaded" if not self.cargo else f"Truck is loaded with {', '.join(self.cargo)}")
+        print(
+            "Truck is not loaded"
+            if not self.cargo
+            else f"Truck is loaded with {', '.join(self.cargo)}"
+        )
         return self.cargo
 
 

@@ -25,7 +25,9 @@
 # Although not mandatory, this is recommended.
 # The 'pass' keyword is used to avoid getting an error. It is used as a placeholder.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Intro: Classes and Objects ===\n")
 
 

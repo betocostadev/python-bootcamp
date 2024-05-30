@@ -4,7 +4,9 @@
 # color, model, year, price and a method to get the bike info.
 # also the bikes must have the methods to horn, accelerate and brake.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Challenge: Bike Factory ===\n")
 
 

@@ -16,7 +16,9 @@
 # The following example shows how to create a generator using a function.
 # The function is called my_generator and it returns a generator object.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Generators ===\n")
 
 
@@ -57,6 +59,7 @@ for number in fibonacci(10):
 
 
 # Using another example with a generator function
+
 
 def multiplyer_gen(numbers: list[int]):
     for number in numbers:

@@ -19,7 +19,9 @@ from abc import ABC, abstractmethod
 from datetime import date
 
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Interfaces and Abstract Classes ===\n")
 
 

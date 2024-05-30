@@ -4,12 +4,18 @@
 # Suppose, we need to color a shape, there are multiple shapes (rectangle, square, circle).
 # However we could use the same method to color any shape. This concept is called Polymorphism.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Polymorphism ===\n")
-print("Polymorphism is an ability (in OOP) to use a common interface for multiple forms (data types).")
-print("""
+print(
+    "Polymorphism is an ability (in OOP) to use a common interface for multiple forms (data types)."
+)
+print(
+    """
 Using Polymorphism, with Inheritance, we can create a method in the parent class that can be overridden
-by a subclass.""")
+by a subclass."""
+)
 
 # Using polymorphism with inheritance
 # The method bark() is defined in both the parent class and the child class.
@@ -61,6 +67,7 @@ print(nemo.speak())
 # The speak() method is defined in each of the classes Dog, Cat, and Fish.
 # The speak() method is overridden in each of the classes Dog, Cat, and Fish.
 # This is an example of polymorphism.
+
 
 def animal_speak(animal):
     return animal.speak()

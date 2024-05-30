@@ -3,7 +3,9 @@
 # Decorators are a design pattern in Python that allows a user to
 # add new functionality to an existing object without modifying its structure.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Decorators ===\n")
 
 # Example using a decorator
@@ -14,6 +16,7 @@ def my_decorator(func):
         print("Something is happening before the function is called.")
         func()
         print("Something is happening after the function is called.")
+
     return wrapper
 
 
@@ -51,7 +54,7 @@ def calculate(operation):
         return a * b
 
     def divide(a, b):
-        if (b == 0):
+        if b == 0:
             return "Error: Division by zero!"
         return a / b
 
@@ -75,6 +78,7 @@ print(calculate("-")(10, 5))
 def calculate_decorator(func):
     def wrapper(a, b):
         print("The result is: ", func(a, b))
+
     return wrapper
 
 

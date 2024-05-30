@@ -11,7 +11,9 @@
 from datetime import date, time, datetime, timedelta, timezone
 import pytz  # type: ignore
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("=== Dates and Times ===")
 
 # Creating a date object
@@ -43,20 +45,26 @@ print(f"Date Time now: {datetime_now}")
 print(f"Date Time this code was written: {datetime_code}")
 print(f"Diference in time: {datetime_now - datetime_code}")
 # Below we are using timedelta to subtract 2 hours and 2 days from the current time.
-print(f"Subtracting 2 hours and 2 days using timedelta: {datetime_now - timedelta(hours=2, days=2)}")
+print(
+    f"Subtracting 2 hours and 2 days using timedelta: {datetime_now - timedelta(hours=2, days=2)}"
+)
 
 date_birthday = datetime(1986, 4, 1, 18, 0, 0)
 days_since_birthday = datetime_now - date_birthday
 months_since_birthday = days_since_birthday.days // 30
 years_since_birthday = months_since_birthday // 12
 
-print("""
+print(
+    """
 ===== Life Stats =====
 Days since my birthday: {day}
 Months since my birthday: {month}
 Years since my birthday: {year}
 +++++++++++++++++++++++
-""".format(day=days_since_birthday, month=months_since_birthday, year=years_since_birthday))
+""".format(
+        day=days_since_birthday, month=months_since_birthday, year=years_since_birthday
+    )
+)
 
 
 # Creating a time object
@@ -101,7 +109,7 @@ date = date1 + timedelta(weeks=1, days=2, hours=3, minutes=4, seconds=5)
 print(f"Date changed for next week and 3 hours more: {date}")
 
 print("\n=== Dealing with timezones using pytz ===\n")
-date_now_amsterdam = datetime.now(pytz.timezone('Europe/Amsterdam'))
-date_now_tokyo = datetime.now(pytz.timezone('Asia/Tokyo'))
+date_now_amsterdam = datetime.now(pytz.timezone("Europe/Amsterdam"))
+date_now_tokyo = datetime.now(pytz.timezone("Asia/Tokyo"))
 print(f"Amsterdam time: {date_now_amsterdam}")
 print(f"Tokyo time: {date_now_tokyo}")

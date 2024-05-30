@@ -3,7 +3,9 @@
 
 from datetime import datetime, timedelta
 
-print("\n======== Python - Introduction to Object Oriented Programming in Python ========\n")
+print(
+    "\n======== Python - Introduction to Object Oriented Programming in Python ========\n"
+)
 print("======== Dates and Times ========")
 
 print("\nstrftime() and strptime() methods\n")
@@ -34,19 +36,19 @@ Please, select the size of your car:
 2 - Medium
 3 - Large
 """
-car_size = ''
+car_size = ""
 
-while car_size not in ['1', '2', '3']:
+while car_size not in ["1", "2", "3"]:
     car_size = input(options)  # small, medium, large
-    if car_size not in ['1', '2', '3']:
+    if car_size not in ["1", "2", "3"]:
         print("Invalid option. Please, try again.")
 
-if car_size == '1':
-    car_size = 'small'
-elif car_size == '2':
-    car_size = 'medium'
+if car_size == "1":
+    car_size = "small"
+elif car_size == "2":
+    car_size = "medium"
 else:
-    car_size = 'large'
+    car_size = "large"
 
 time_car_small = 30
 time_car_medium = 45
@@ -55,9 +57,9 @@ time_car_large = 60
 
 actual_time = datetime.now()
 
-if car_size == 'small':
+if car_size == "small":
     estimated_time = actual_time + timedelta(minutes=time_car_small)
-elif car_size == 'medium':
+elif car_size == "medium":
     estimated_time = actual_time + timedelta(minutes=time_car_medium)
 else:
     estimated_time = actual_time + timedelta(minutes=time_car_large)

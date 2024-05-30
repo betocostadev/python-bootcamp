@@ -6,7 +6,9 @@
 # It enables creating complex types by combining objects of other types.
 # This means that a class Composite can contain an object of another class Component.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Composition ===\n")
 
 

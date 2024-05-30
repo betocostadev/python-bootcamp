@@ -6,7 +6,9 @@
 # modification of data. To prevent accidental change, an object’s variable can only be changed by an
 # object’s method. Those types of variables are known as private variable.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Encapsulation ===\n")
 
 

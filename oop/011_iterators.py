@@ -15,7 +15,9 @@
 # There are cases where a list can be huge and we don't want to load all the elements into memory.
 # In this case, we can use an iterator to read the elements one by one.
 
-print("======== Python - Introduction to Object Oriented Programming in Python ========")
+print(
+    "======== Python - Introduction to Object Oriented Programming in Python ========"
+)
 print("\n=== Iterators ===\n")
 
 # Example of an iterator
@@ -32,6 +34,7 @@ print("\n=== Create an iterator ===\n")
 
 
 # Iterator classes must have the __iter__() and __next__() methods.
+
 
 class MyNumbers:
     def __iter__(self):
