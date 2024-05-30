@@ -5,18 +5,22 @@ import csv
 from pathlib import Path
 
 
-print("\n======== Python - Introduction to Object Oriented Programming in Python ========\n")
+print(
+    "\n======== Python - Introduction to Object Oriented Programming in Python ========\n"
+)
 print("======== Working with CSV files ========")
 
 ROOT_PATH = Path(__file__).parent
 
 # Will create a new file if there is none, and will overwrite the file if it already exists
 try:
-    with open(ROOT_PATH / 'example.csv', mode='w', newline='', encoding='utf-8') as file:
+    with open(
+        ROOT_PATH / "example.csv", mode="w", newline="", encoding="utf-8"
+    ) as file:
         writer = csv.writer(file)
-        writer.writerow(['Name', 'LastName', 'Age'])
-        writer.writerow(['John', 'Doe', 30])
-        writer.writerow(['Jane', 'Doe', 28])
+        writer.writerow(["Name", "LastName", "Age"])
+        writer.writerow(["John", "Doe", 30])
+        writer.writerow(["Jane", "Doe", 28])
         print("File written successfully.")
 except PermissionError as e:
     print("Permission denied: ", e)
@@ -28,7 +32,7 @@ except Exception as e:
 
 print("\nReading the file: ")
 try:
-    with open(ROOT_PATH / 'example.csv', mode='r') as file:
+    with open(ROOT_PATH / "example.csv", mode="r") as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
             print(row)
@@ -41,9 +45,11 @@ except Exception as e:
 
 
 try:
-    with open(ROOT_PATH / 'example.csv', mode='a', newline='', encoding='utf-8') as file:
+    with open(
+        ROOT_PATH / "example.csv", mode="a", newline="", encoding="utf-8"
+    ) as file:
         writer = csv.writer(file)
-        writer.writerow(['Vecna', 'The Undying', 160])
+        writer.writerow(["Vecna", "The Undying", 160])
         print("File written successfully.")
 except PermissionError as e:
     print("Permission denied: ", e)
@@ -58,11 +64,11 @@ except Exception as e:
 # Notice that we are using DictReader below, we will not the header row
 print("\nReading the file again: ")
 try:
-    with open(ROOT_PATH / 'example.csv', mode='r') as file:
+    with open(ROOT_PATH / "example.csv", mode="r") as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             # print([row['Name'], row['LastName'], row['Age']])
-            print(row['Name'], row['LastName'], row['Age'])
+            print(row["Name"], row["LastName"], row["Age"])
 except PermissionError as e:
     print("Permission denied: ", e)
 except FileNotFoundError as e:

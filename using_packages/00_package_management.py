@@ -20,3 +20,48 @@ print("======== Managing packages ========")
 
 # To install a package:
 # pip install package_name
+
+# Other package managers for Python:
+# conda
+# pipenv
+# poetry
+
+
+# Some package managers like pipenv are good for managing dependencies and virtual environments
+# They can help to delete unused packages and to keep track of the dependencies
+
+# To install pipenv:
+# pip install pipenv
+
+# To create a virtual environment with pipenv:
+# pipenv install package_name
+
+# To activate the virtual environment:
+# pipenv shell
+
+# To deactivate the virtual environment:
+# exit
+
+# Pipenv creates a Pipfile and a Pipfile.lock to keep track of the dependencies
+
+# Poetry is another package manager for Python
+
+# To install poetry:
+# pip install poetry
+
+# To create a new project with poetry:
+# poetry new project_name
+
+# It's also possible to initialize a new project in an existing directory:
+# poetry init
+
+# To add a package to the project:
+# poetry add package_name
+
+# To install the dependencies:
+# poetry install
+
+# To run a script:
+# poetry run python script.py
+
+# Poetry creates a pyproject.toml file to keep track of the dependencies

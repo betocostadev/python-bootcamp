@@ -1,7 +1,9 @@
 # Python - Introduction to Object Oriented Programming in Python
 # Manipulating files
 
-print("\n======== Python - Introduction to Object Oriented Programming in Python ========\n")
+print(
+    "\n======== Python - Introduction to Object Oriented Programming in Python ========\n"
+)
 print("======== Manipulating files ========")
 
 # We will deal mainly with TXT and CSV files
@@ -25,7 +27,7 @@ print("======== Manipulating files ========")
 # file.close()
 
 print("\nReading files\n")
-txt_file = open('using_files/example.txt', 'r')
+txt_file = open("using_files/example.txt", "r")
 content = txt_file.readline()  # Can use an int to limit the number of characters read
 # It reads line by line, you can keep calling the function for the next lines
 print("Reading the file line by line: ")
@@ -34,7 +36,7 @@ content = txt_file.readline()  # Will read the next line
 print(content)  # Will print the next line
 txt_file.close()
 
-txt_file = open('using_files/example.txt', 'r')
+txt_file = open("using_files/example.txt", "r")
 content = txt_file.readlines()
 print("\nReading all lines of the file in list format: ")
 for line in content:
@@ -42,14 +44,14 @@ for line in content:
 txt_file.close()
 
 print("\nReading the entire file: ")
-txt_file = open('using_files/example.txt', 'r')
+txt_file = open("using_files/example.txt", "r")
 content = txt_file.read()
 print(content)
 txt_file.close()
 
 # Reading line by line and checking the end of the file
 print("\nIterating over the file content:")
-txt_file = open('using_files/example.txt', 'r')
+txt_file = open("using_files/example.txt", "r")
 
 while len(line := txt_file.readline()):
     print(line)
@@ -59,7 +61,7 @@ txt_file.close()
 
 print("\nWriting files\n")
 # Writing a file
-new_txt_file = open('using_files/new_file.txt', 'w')
+new_txt_file = open("using_files/new_file.txt", "w")
 
 new_txt_file.write("This is a new file.\n")
 new_txt_file.writelines(["This is the second line.\n", "This is the third line.\n"])
