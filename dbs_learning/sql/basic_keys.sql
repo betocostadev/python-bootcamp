@@ -1,3 +1,4 @@
+-- Learning SQL: 02 - Primary keys and foreign keys
 -- PRIMARY KEYS AND FOREIGN KEYS
 -- Creating the tables created previously using basic_operations.sql to use primary keys and foreign keys
 
@@ -73,7 +74,7 @@ ADD FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE;
 
 -- Inserting data
 
-INSERT INTO users (name, email, address, birth_date) VALUES ('Jane Doe', 'jane_doe@icloud.com', 'Street Bunglaros, 220 - Brookling New York/NY', '1989-03-15');
+INSERT INTO users (name, email, address, birth_date) VALUES ('Jane Doe', 'jane_doe@icloud.com', 'Street Bunglaros, 220, New York, New York', '1989-03-15');
 INSERT INTO reservations (user_id, destination_id, reservation_date, reservation_status) VALUES (5, 2, '2024-10-05', 'PENDING');
 INSERT INTO reservations (user_id, destination_id, reservation_date, reservation_status) VALUES (2, 2, '2024-10-05', 'PENDING');
 INSERT INTO destinations (name, description) VALUES ('Ubatuba', 'Lots of beaches to have a lot of fun!');

@@ -1,3 +1,4 @@
+-- Learning SQL: 01 - Basic operations
 -- Creating tables
 
 CREATE TABLE users (
@@ -22,10 +23,10 @@ CREATE TABLE viagens.reservations (
 
 -- Inserting data
 
-INSERT INTO users (id, name, email, address, birth_date) VALUES (1, 'Beto Marques', 'beto@gmail.com', 'Rua Bunda Lele, 10 - Santa Maria São Paulo/SP', '1986-04-01');
-INSERT INTO users (id, name, email, address, birth_date) VALUES (2, 'John Doe', 'john.doe@outlook.com', 'Street Bunglaros, 220 - Brookling New York/NY', '1988-02-10');
-INSERT INTO users (id, name, email, address, birth_date) VALUES (3, 'Maria Silva', 'mari@gmail.com', 'Rua das Flores, 100 - Centro Rio de Janeiro/RJ', '1990-10-15');
-INSERT INTO users (id, name, email, address, birth_date) VALUES (4, 'Juliana Silva', 'jusil@gmail.com', 'Rua das Flores, 100 - Centro Rio de Janeiro/RJ', '1991-12-03');
+INSERT INTO users (id, name, email, address, birth_date) VALUES (1, 'Beto Marques', 'beto@gmail.com', 'Rua Bunda Lele, 101, São Paulo, São Paulo', '1986-04-01');
+INSERT INTO users (id, name, email, address, birth_date) VALUES (2, 'John Doe', 'john.doe@outlook.com', 'Street Bunglaros, 220, New York, New York', '1988-02-10');
+INSERT INTO users (id, name, email, address, birth_date) VALUES (3, 'Maria Silva', 'mari@gmail.com', 'Rua das Flores, 100, Rio de Janeiro, Rio de Janeiro', '1990-10-15');
+INSERT INTO users (id, name, email, address, birth_date) VALUES (4, 'Juliana Silva', 'jusil@gmail.com', 'Rua das Flores, 100, Rio de Janeiro, Rio de Janeiro', '1991-12-03');
 
 INSERT INTO destinations (id, name, description) VALUES (1, 'Praia da Rosa', 'Great beach, so much fun!');
 INSERT INTO destinations (id, name, description) VALUES (2, 'Serra do Mar', 'Great place to relax and enjoy the nature');
@@ -51,7 +52,7 @@ SELECT * FROM `reservations` WHERE reservation_date > '2024-11-30' AND reservati
 -- Updating data
 
 UPDATE users SET name = 'Beto Marques Costa' WHERE id = 1;
-UPDATE users SET address = 'Rua Bunda Lele, 101 - Santa Maria São Paulo/SP' WHERE id = 1;
+UPDATE users SET address = 'Rua Bunda Lele, 101, São Paulo, São Paulo' WHERE id = 1;
 UPDATE reservations SET reservation_status = 'CONFIRMED' WHERE id = 2;
 UPDATE reservations SET reservation_date = '2024-09-10' WHERE id = 2;
 
