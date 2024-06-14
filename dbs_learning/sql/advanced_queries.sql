@@ -1,4 +1,4 @@
--- Learning SQL: 05 - Advanced queries
+-- Learning SQL: 04 - Advanced queries
 -- ADVANCED QUERIES
 
 -- Querying data
