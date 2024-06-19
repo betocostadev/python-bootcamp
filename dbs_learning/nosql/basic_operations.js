@@ -32,3 +32,54 @@ db.destinations.insertMany([
         country: "Japan"
     }
 ])
+
+// Fetching data
+// Fetching all users
+db.users.find({})
+// Fetching a single user
+db.users.findOne({ name: "Alice Thompson" })
+// Fetching all users with a specific status
+db.users.find({ status: "active" })
+// Fetching all users with a specific status and age
+db.users.find({ status: "active", age: 30 })
+// Fetching all users with a specific status and age range
+db.users.find({ status: "active", age: { $gte: 30, $lte: 40 } })
+
+
+// Updating data
+// Updating a single user
+db.users.updateOne(
+    { name: "Bob Brown" },
+    { $set: { status: "inactive", updated_at: new Date() } }
+)
+
+// Updating multiple users
+db.users.updateMany(
+    { status: "active" },
+    { $set: { status: "inactive", updated_at: new Date() } }
+)
+
+// Find and update a single user
+db.users.findOneAndUpdate(
+    { name: "Alice Thompson" },
+    { $set: { status: "inactive" } }
+)
+
+// Find and update multiple users
+db.users.findAndModify(
+    { status: "active" },
+    { $set: { status: "inactive" } }
+)
+
+// Deleting data
+// Deleting a single user
+db.users.deleteOne({ name: "Beto Costa" })
+
+// Deleting multiple users
+db.users.deleteMany({ status: "inactive" })
+
+// Deleting all users
+db.users.deleteMany({})
+
+// Find and delete a single user
+db.users.findOneAndDelete({ name: "Alice Thompson" })
