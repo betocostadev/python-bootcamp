@@ -92,5 +92,20 @@ db.users.insertMany([
         "status": "active",
         "created_at": new Date(),
         "updated_at": new Date(),
+    },
+    {
+        "name": "Pâmela Apolinário",
+        "email": "pam.apol@dio.com.br",
+        "age": 32,
+        "birth_date": "1992-10-05",
+        "address": {
+            "street": "Rua das Flores 123",
+            "city": "Curitiba",
+            "state": "PR",
+            "zip": "80020-340"
+        },
+        "status": "inactive",
+        "created_at": new Date(),
+        "updated_at": new Date(),
     }
 ])

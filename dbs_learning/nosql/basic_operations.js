@@ -49,6 +49,11 @@ db.users.findOneAndUpdate(
     { name: "Alice Thompson" },
     { $inc: { age: 1 } }
 )
+// Find a user and decrement the age by 1
+db.users.findOneAndUpdate(
+    { name: "Alice Thompson" },
+    { $inc: { age: -1 } }
+)
 
 
 // Updating data
