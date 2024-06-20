@@ -1,4 +1,4 @@
-// This is just feed data to be inserted in the users collection
+// This is just seed data to be inserted in the users collection
 // Inserting a single user:
 db.users.insertOne({
     "name": "John Doe",

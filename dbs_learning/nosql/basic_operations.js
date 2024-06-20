@@ -44,6 +44,11 @@ db.users.find({ status: "active" })
 db.users.find({ status: "active", age: 30 })
 // Fetching all users with a specific status and age range
 db.users.find({ status: "active", age: { $gte: 30, $lte: 40 } })
+// Find a user and increment the age by 1
+db.users.findOneAndUpdate(
+    { name: "Alice Thompson" },
+    { $inc: { age: 1 } }
+)
 
 
 // Updating data
@@ -69,6 +74,11 @@ db.users.findOneAndUpdate(
 db.users.findAndModify(
     { status: "active" },
     { $set: { status: "inactive" } }
+)
+
+db.users.findAndModify(
+    { status: "active" },
+    { $set: { travelling: 1 } }
 )
 
 // Deleting data
