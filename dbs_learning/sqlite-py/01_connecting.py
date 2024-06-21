@@ -10,6 +10,32 @@ from pathlib import Path
 
 ROOT_PATH = Path(__file__).parent
 
-con = sqlite3.connect(ROOT_PATH / "clients.db")
+conn = sqlite3.connect(ROOT_PATH / "clients.db")
 
-print(con)
+print(f"DB Connection: {conn}")
+
+# Create the database cursor
+# The cursor object is an instance of the cursor class and is used to execute SQL statements in SQLite3.
+
+cursor = conn.cursor()
+
+# Create a table
+# cursor.execute(
+#     "CREATE TABLE clients (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100), email VARCHAR(150))"
+# )
+
+# Commit the changes
+# conn.commit()
+
+data_one = ("Beto Marques", "beto.m@gmail.com")
+
+# Insert a row of data
+# Using (?, ?) as placeholders for the values
+# This is a good practice to avoid SQL injection attacks
+cursor.execute("INSERT INTO clients (name, email) VALUES (?, ?)", data_one)
+
+# Commit the changes
+conn.commit()
+
+# Close the connection
+conn.close()
