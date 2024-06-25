@@ -14,15 +14,18 @@ print(f"DB Connection: {conn}")
 
 cursor = conn.cursor()
 
-data_one = ("Beto Anthens", "beto.ant@gmail.com")
 
 # Insert a row of data
 # Using (?, ?) as placeholders for the values
 # This is a good practice to avoid SQL injection attacks
-cursor.execute("INSERT INTO clients (name, email) VALUES (?, ?)", data_one)
+def insert_client(conn, cursor, data):
+    cursor.execute("INSERT INTO clients (name, email) VALUES (?, ?)", data)
+    # Commit the changes
+    conn.commit()
 
-# Commit the changes
-conn.commit()
+
+data_one = ("Daniella Tan", "dani@icloud.com")
+insert_client(conn, cursor, data_one)
 
 # Close the connection
 conn.close()

@@ -19,15 +19,18 @@ print(f"DB Connection: {conn}")
 
 cursor = conn.cursor()
 
+
 # Create a table
-# cursor.execute(
-#     "CREATE TABLE clients (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100), email VARCHAR(150))"
-# )
+def create_table(cursor, table_name, columns):
+    cursor.execute(f"CREATE TABLE {table_name} ({columns})")
+
+
+# create_table(cursor, "clients", "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100), email VARCHAR(150)")
 
 # Commit the changes
 # conn.commit()
 
-data_one = ("Beto Marques", "beto.m@gmail.com")
+data_one = ("James Jameson", "jameson@outlook.com")
 
 # Insert a row of data
 # Using (?, ?) as placeholders for the values
