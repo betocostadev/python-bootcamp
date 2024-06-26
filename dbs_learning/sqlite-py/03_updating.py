@@ -1,6 +1,6 @@
 # Learning Python with SQL: 02 - Updating Data
 # Link: https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
-# CONNECTING TO SQLITE3
+# UPDATING DATA
 
 import sqlite3
 

@@ -1,6 +1,6 @@
 # Learning Python with SQL: 02 - Inserting Data
 # Link: https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
-# CONNECTING TO SQLITE3
+# INSERTING DATA
 
 import sqlite3
 
