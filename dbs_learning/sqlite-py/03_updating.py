@@ -1,4 +1,4 @@
-# Learning Python with SQL: 02 - Updating Data
+# Learning Python with SQL: 03 - Updating Data
 # Link: https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 # UPDATING DATA
 
