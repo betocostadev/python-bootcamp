@@ -44,7 +44,7 @@ for client in clients:
 
 # Getting all clients e-mails
 print("\nFetching all clients e-mails - fetchall()")
-emails = cursor.execute("SELECT email FROM clients").fetchall()
+emails = cursor.execute("SELECT email FROM clients ORDER BY email").fetchall()
 
 for email in emails:
     print(email)
