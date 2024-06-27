@@ -1,5 +1,4 @@
 # Learning Python with SQL: 06 - Querying Data
-# Link: https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 # QUERYING DATA
 
 import sqlite3

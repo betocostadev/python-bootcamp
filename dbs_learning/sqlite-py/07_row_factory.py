@@ -1,5 +1,4 @@
-# Learning Python with SQL: 06 - Using SQLite Row Factory
-# Link: https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
+# Learning Python with SQL: 07 - Using SQLite Row Factory
 # USING SQLITE ROW FACTORY
 
 import sqlite3
