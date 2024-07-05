@@ -16,6 +16,7 @@ Bootcamp DIO - [Python for AI Backend Developers](https://web.dio.me/track/codin
 - data_structures: Dicts, sets, lists, tuples, and functions;
 - dbs_learning: Simple SQL code, and MongoDB code;
 - labs: Course Labs;
+    - workout_api: A workout API built using Python with FastAPI
 - oop: Classes, objects, constructors, generators, decorators, and oop in general;
 - using_files: Common practices when reading, and writing files using Python;
 - using_packages: Best practices for packages and basics about pip, Pipenv, and Poetry.
