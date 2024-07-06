@@ -1,4 +1,11 @@
 # FastAPI
+
+This was created based on DIOs course **Python AI Backend Developer**.
+
+This is only a study repository, and it's contents are complely based on [this repository](https://github.com/digitalinnovationone/workout_api).
+
+Below is the original README file o the repository.
+
 ### Quem é o FastAPi?
 Framework FastAPI, alta performance, fácil de aprender, fácil de codar, pronto para produção.
 FastAPI é um moderno e rápido (alta performance) framework web para construção de APIs com Python 3.6 ou superior, baseado nos type hints padrões do Python.
@@ -70,6 +77,7 @@ e acesse: http://127.0.0.1:8000/docs
         - status_code: 303
     - Adicionar paginação utilizando a lib: fastapi-pagination
         - limit e offset
+
 # Referências
 
 FastAPI: https://fastapi.tiangolo.com/
