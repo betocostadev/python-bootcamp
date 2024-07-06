@@ -2,7 +2,7 @@ from typing import List
 from uuid import UUID
 import pytest
 from store.core.exceptions import NotFoundException
-from store.schemas.product import ProductOut
+from store.schemas.product import ProductOut, ProductUpdateOut
 from store.usecases.product import product_usecase
 
 
@@ -38,9 +38,8 @@ async def test_usercases_should_query_multiple_products():
     assert len(result) > 1
 
 
-# async def test_usercases_should_update_product_by_id(product_id):
-#     result = await product_usecase.update(
-#         id=product_id, body={"name": "Samsung Galaxy S24 Ultra"}
-#     )
+async def test_usercases_should_update_product_by_id(product_id, product_up):
+    product_up.price = 5900.49
+    result = await product_usecase.update(id=product_id, body=product_up)
 
-#     assert isinstance(result, ProductOut)
+    assert isinstance(result, ProductUpdateOut)

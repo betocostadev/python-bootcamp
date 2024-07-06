@@ -4,7 +4,7 @@ from uuid import UUID
 import pytest
 
 from store.db.mongo import db_client
-from store.schemas.product import ProductIn
+from store.schemas.product import ProductIn, ProductUpdate
 from tests.factories import product_data_factory
 
 # Using the event_loop fixture in the test
@@ -41,3 +41,8 @@ def product_id() -> UUID:
 @pytest.fixture
 def product_in(product_id):
     return ProductIn(**product_data_factory(), id=product_id)
+
+
+@pytest.fixture
+def product_up(product_id):
+    return ProductUpdate(**product_data_factory(), id=product_id)
