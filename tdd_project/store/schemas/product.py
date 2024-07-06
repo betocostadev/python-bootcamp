@@ -7,3 +7,7 @@ class ProductIn(BaseSchemaMixin):
     quantity: int = Field(..., json_schema_extra={"title": "Product quantity"})
     price: float = Field(..., json_schema_extra={"title": "Product price"})
     status: str = Field(..., json_schema_extra={"title": "Product status"})
+
+
+class ProductOut(ProductIn):
+    pass
