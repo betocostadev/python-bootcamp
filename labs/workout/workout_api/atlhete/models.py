@@ -3,8 +3,8 @@
 from datetime import datetime
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from labs.workout.workout_api.categories.models import CategoryModel
-from labs.workout.workout_api.training_center.models import TrainingCenterModel
+from workout_api.categories.models import CategoryModel
+from workout_api.training_center.models import TrainingCenterModel
 from workout_api.contrib.models import BaseModel
 
 
@@ -13,7 +13,7 @@ class AthleteModel(BaseModel):
 
     pk_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(50), nullable=False)
-    document: Mapped[str] = mapped_column(String(14), nullable=False)
+    document: Mapped[str] = mapped_column(String(14), unique=True, nullable=False)
     age: Mapped[int] = mapped_column(Integer, nullable=False)
     weight: Mapped[float] = mapped_column(Integer, nullable=False)
     height: Mapped[float] = mapped_column(Float, nullable=False)
