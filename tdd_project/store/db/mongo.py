@@ -6,6 +6,7 @@ from store.core.config import settings
 class MongoClient:
     def __init__(self) -> None:
         self.client: AsyncIOMotorClient = AsyncIOMotorClient(settings.DATABASE_URL)
+        self.db = self.client["dio-tdd-project"]
 
     def get(self) -> AsyncIOMotorClient:
         return self.client
