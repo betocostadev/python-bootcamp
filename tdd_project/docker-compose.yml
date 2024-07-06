@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   db:
-    image: 'bitnami/mongodb:latest'
+    image: 'mongo:latest'
     ports:
       - '27017:27017'
     restart: on-failure
