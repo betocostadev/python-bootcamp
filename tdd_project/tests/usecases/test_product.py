@@ -30,7 +30,7 @@ async def test_usecases_should_get_not_found():
     )
 
 
-async def test_usercases_should_query_multiple_products():
+async def test_usecases_should_query_multiple_products():
     # result = await product_usecase.query(status="active")
 
     result = await product_usecase.query()
@@ -38,8 +38,24 @@ async def test_usercases_should_query_multiple_products():
     assert len(result) > 1
 
 
-async def test_usercases_should_update_product_by_id(product_id, product_up):
+async def test_usecases_should_update_product_by_id(product_id, product_up):
     product_up.price = 5900.49
     result = await product_usecase.update(id=product_id, body=product_up)
 
     assert isinstance(result, ProductUpdateOut)
+
+
+async def test_usecases_should_delete_product_by_id(product_id):
+    result = await product_usecase.delete(id=product_id)
+
+    assert result is True
+
+
+async def test_usecases_should_not_delete_not_found():
+    with pytest.raises(NotFoundException) as err:
+        await product_usecase.delete(id=UUID("1e4f214e-85f7-461a-89d0-a751a32e3bb9"))
+
+    assert (
+        err.value.message
+        == "Product not found with filter: 1e4f214e-85f7-461a-89d0-a751a32e3bb9"
+    )

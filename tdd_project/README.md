@@ -22,3 +22,16 @@ To start run `poetry shell` to select the environment.
 It should select the tdd project environment
 
 Then run `poetry install` to install the project dependencies.
+
+After you've set up the installation, run the project with:
+
+```
+make container up
+```
+This will run the docker container with MongoDB (Using an instance compatible with Macs using Apple Sillicon)
+
+Then run in another instance of the terminal:
+
+```
+make test
+```
