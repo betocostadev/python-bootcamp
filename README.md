@@ -18,5 +18,6 @@ Bootcamp DIO - [Python for AI Backend Developers](https://web.dio.me/track/codin
 - labs: Course Labs;
     - workout_api: A workout API built using Python with FastAPI
 - oop: Classes, objects, constructors, generators, decorators, and oop in general;
+- tdd_project: A FastAPI backend created using MongoDB, and following Test Driven Development practices. Information about how to run the project is provided in the [application Readme](./tdd_project/README.md)
 - using_files: Common practices when reading, and writing files using Python;
 - using_packages: Best practices for packages and basics about pip, Pipenv, and Poetry.
