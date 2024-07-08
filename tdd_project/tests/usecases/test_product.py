@@ -47,7 +47,7 @@ async def test_usecases_should_query_multiple_products():
 
 # async def test_usecases_should_update_product_by_id(product_id, product_up):
 async def test_usecases_should_update_product_by_id(product_inserted, product_up):
-    product_up.price = 5900.49
+    product_up.price = "5900.49"
     result = await product_usecase.update(id=product_inserted.id, body=product_up)
 
     assert isinstance(result, ProductUpdateOut)
