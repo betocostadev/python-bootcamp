@@ -30,8 +30,8 @@ async def clear_collections(mongo_client):
     yield
     collections_names = await mongo_client.get_database().list_collection_names()
     for collection_name in collections_names:
-        print(collection_name)
-        # await mongo_client.get_database()[collection_name].delete_many({})
+        # print(collection_name)
+        await mongo_client.get_database()[collection_name].delete_many({})
 
 
 @pytest.fixture
