@@ -13,7 +13,7 @@ def test_schemas_validated():
     assert isinstance(product.id, UUID)
     assert product.name == "Samsung Galaxy S24 Ultra"
     assert product.quantity == 10
-    assert product.price == 5600.0
+    assert product.price == 5599.49
     assert product.status == "available"
 
 

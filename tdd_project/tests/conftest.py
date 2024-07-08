@@ -5,7 +5,8 @@ import pytest
 
 from store.db.mongo import db_client
 from store.schemas.product import ProductIn, ProductUpdate
-from tests.factories import product_data_factory
+from tests.factories import product_data_factory, products_data_factory
+from store.usecases.product import product_usecase
 
 # Using the event_loop fixture in the test
 # This fixture is used to create a new event loop for each test function
@@ -29,8 +30,8 @@ async def clear_collections(mongo_client):
     yield
     collections_names = await mongo_client.get_database().list_collection_names()
     for collection_name in collections_names:
-        print(collection_name)
-        # await mongo_client.get_database()[collection_name].delete_many({})
+        # print(collection_name)
+        await mongo_client.get_database()[collection_name].delete_many({})
 
 
 @pytest.fixture
@@ -46,3 +47,18 @@ def product_in(product_id):
 @pytest.fixture
 def product_up(product_id):
     return ProductUpdate(**product_data_factory(), id=product_id)
+
+
+@pytest.fixture
+async def product_inserted(product_in):
+    return await product_usecase.create(body=product_in)
+
+
+@pytest.fixture
+def products_in():
+    return [ProductIn(**product) for product in products_data_factory()]
+
+
+@pytest.fixture
+async def products_inserted(products_in):
+    return [await product_usecase.create(body=product_in) for product_in in products_in]
