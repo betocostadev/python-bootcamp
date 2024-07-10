@@ -1,5 +1,7 @@
 from fastapi import FastAPI
+
 from store.core.config import settings
+from store.routers import api_router
 
 
 class App(FastAPI):
@@ -7,12 +9,11 @@ class App(FastAPI):
         super().__init__(
             *args,
             **kwargs,
-            version="0.1.0",
+            version="0.0.1",
             title=settings.PROJECT_NAME,
-            root_path=settings.ROOT_PATH
+            # root_path=settings.ROOT_PATH
         )
 
 
 app = App()
-
-print(app.version)
+app.include_router(api_router)

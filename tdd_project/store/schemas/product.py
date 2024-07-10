@@ -24,7 +24,7 @@ class ProductOut(ProductIn, OutMixin):
 
 # Added Decimal_ to convert Decimal to Decimal128
 # Making it compatible with MongoDB
-def convert_decimal_128(value: Decimal) -> Decimal128:
+def convert_decimal_128(value: Decimal):
     return Decimal128(str(value))
 
 

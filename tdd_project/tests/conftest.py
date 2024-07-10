@@ -1,4 +1,5 @@
 import asyncio
+from typing import Any, AsyncGenerator
 from uuid import UUID
 
 import pytest
@@ -7,6 +8,7 @@ from store.db.mongo import db_client
 from store.schemas.product import ProductIn, ProductUpdate
 from tests.factories import product_data_factory, products_data_factory
 from store.usecases.product import product_usecase
+from httpx import AsyncClient, ASGITransport
 
 # Using the event_loop fixture in the test
 # This fixture is used to create a new event loop for each test function
@@ -32,6 +34,21 @@ async def clear_collections(mongo_client):
     for collection_name in collections_names:
         # print(collection_name)
         await mongo_client.get_database()[collection_name].delete_many({})
+
+
+@pytest.fixture
+async def client() -> AsyncGenerator[Any, Any]:
+    from store.main import app
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac:
+        yield ac
+
+
+@pytest.fixture
+def products_url() -> str:
+    return "/products/"
 
 
 @pytest.fixture
