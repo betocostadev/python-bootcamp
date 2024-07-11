@@ -45,3 +45,13 @@ async def update_product(
         return await usecase.update(id=id, body=body)
     except NotFoundException as err:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=err.message)
+
+
+@router.delete("/products/{id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_product(
+    id: UUID4 = Path(alias="id"), usecase: ProductUsecase = Depends()
+) -> None:
+    try:
+        await usecase.delete(id=id)
+    except NotFoundException as err:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=err.message)

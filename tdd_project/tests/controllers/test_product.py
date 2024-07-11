@@ -48,8 +48,6 @@ async def test_controller_should_query_multiple_products(
     response = await client.get(products_url)
     content = response.json()
 
-    print(content)
-
     assert response.status_code == status.HTTP_200_OK
     assert isinstance(content, List)
     assert len(content) > 1
@@ -66,3 +64,24 @@ async def test_controller_should_update_product(client, products_url, product_in
     assert response.status_code == status.HTTP_200_OK
     assert content["quantity"] == 0
     assert content["status"] == "unavailable"
+
+
+async def test_controller_delete_should_return_no_content(
+    client, products_url, product_inserted
+):
+    response = await client.delete(f"{products_url}{product_inserted.id}")
+
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+async def test_controller_delete_should_get_product_not_found(client, products_url):
+    response = await client.delete(
+        f"{products_url}1e4f214e-85f7-461a-89d0-a751a32e3bb9"
+    )
+
+    content = response.json()
+
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    assert content == {
+        "detail": "Product not found with filter: 1e4f214e-85f7-461a-89d0-a751a32e3bb9"
+    }
