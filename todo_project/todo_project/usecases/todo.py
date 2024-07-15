@@ -9,6 +9,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from todo_project.models.todo import TodoModel
 from todo_project.schemas.todo import TodoSchema
 from todo_project.db.mongo import db_client
+from todo_project.schemas.subtodo import SubTodoSchema
 
 
 class TodoUseCases:
@@ -18,7 +19,17 @@ class TodoUseCases:
     async def create_todo(self, todo: TodoModel) -> TodoSchema:
         result = await self.db.insert_one(todo.model_dump())
         new_todo = await self.db.find_one({"_id": result.inserted_id})
+        new_todo["id"] = str(new_todo["_id"])
         return TodoSchema(**new_todo)
+
+    async def create_sub_task(
+        self, todo_id: str, sub_task: SubTodoSchema
+    ) -> SubTodoSchema:
+        await self.db.update_one(
+            {"_id": todo_id}, {"$push": {"sub_tasks": sub_task.dict()}}
+        )
+        updated_todo = await self.db.find_one({"_id": todo_id})
+        return SubTodoSchema(**updated_todo["sub_tasks"][-1])
 
     async def get_all_todos(self) -> List[TodoSchema]:
         todos = await self.db.find().to_list(length=None)

@@ -2,8 +2,8 @@
 
 from pydantic import Field
 
-from todo_project.schemas.base import BaseSchemaMixin, OutSchema
+from todo_project.schemas.base import BaseSchemaMixin
 
 
-class SubTodoSchema(OutSchema, BaseSchemaMixin):
+class SubTodoSchema(BaseSchemaMixin):
     title: str = Field(max_length=256)

@@ -1,10 +1,9 @@
 # todo_project/models/base.py
 
+from datetime import datetime
 from typing import Optional
 
 from pydantic import BaseModel, Field
-
-from todo_project.schemas.base import OutSchema
 
 
 class BaseSchemaMixin(BaseModel):
@@ -12,5 +11,8 @@ class BaseSchemaMixin(BaseModel):
         from_attributes = True
 
 
-class MongoModel(OutSchema, BaseSchemaMixin):
+class MongoModel(BaseModel):
     id: Optional[str] = Field(alias="_id")
+    completed: bool = Field(default=False)
+    created_at: datetime = Field()
+    updated_at: datetime = Field()
